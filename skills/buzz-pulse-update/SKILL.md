@@ -33,6 +33,38 @@ If you do publish on explicit request, confirm the destination (which
 project/initiative/issue, which channel) before sending, since a wrong
 guess here is public and hard to walk back cleanly.
 
+## Publishing to Buzz Pulse (if you have `buzz` CLI access)
+
+This applies only to an agent with its own Buzz identity and `buzz` CLI
+access (e.g. an agent a user DMs inside Buzz). If you don't have that,
+skip this section — hand back the approved draft as text per "Output"
+above and let the user paste it themselves.
+
+Buzz has two separate surfaces; publishing to the wrong one is public and
+can't be quietly undone, so confirm which one is meant before sending:
+
+| | Pulse | Channel |
+|---|---|---|
+| Nostr kind | `1` (text note) | `9` (channel message) |
+| Reaches | Everyone in the workspace | Just that channel's members |
+| Command | `buzz social publish --content "..."` | `buzz messages send --channel <id> --content "..."` |
+| Read back | `buzz social notes` | `buzz messages read --channel <id>` |
+
+Pulse is community-wide by default, so treat it as higher-stakes than a
+channel: never run `buzz social publish` on an implied or earlier-turn
+approval — get an explicit yes on the *exact current text* being sent,
+since a draft edited after approval is no longer the thing that was
+approved.
+
+Sequence:
+1. Draft the update per the rules below and show it to the user.
+2. Get explicit approval of the exact text (not just "an update," the
+   text as it now reads).
+3. Run `buzz social publish --content "<the approved draft, verbatim>"`
+   (or the channel-scoped command, if that's what was approved).
+4. Report back the note id and timestamp the command returns, as a
+   receipt the user can point to.
+
 ## Rules
 
 1. **Language.** Write every update in English.
