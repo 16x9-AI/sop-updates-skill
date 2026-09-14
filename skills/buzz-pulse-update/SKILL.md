@@ -119,19 +119,23 @@ Sequence:
    single bullet below it.
 
 5. **Length.** Keep every update to **280 visible characters or fewer**,
-   including the title, bullet text, visible link labels, and spaces. Do
-   not count link destination URLs toward the limit. Count it — don't
-   estimate by eye — before handing the draft back.
+   including the title, bullet text, and spaces. On a surface that renders
+   markdown links (`[Label](url)`), don't count the destination URL — only
+   the visible label. On a surface that doesn't (Buzz's Pulse tab, per
+   rule 10) the raw URL is what's actually shown, so it counts in full —
+   this is exactly why rule 10 says to use the short form of a Linear URL.
+   Count it — don't estimate by eye — before handing the draft back.
 
 6. **Prioritization.** Prioritize impact and essential information. Omit
    technical detail unless it's necessary to understand the update.
 
 7. **Bullets, not paragraphs.** Use a short series of scannable one-line
-   bullets — one fact per line, no leading bullet symbol (no `•`, `-`, or
-   similar; Buzz renders each line as its own item on its own). Where it
-   fits naturally, pair a headline with its essential supporting fact after
-   an em dash; a single clean sentence is also fine when that says it
-   better. Format for executives with little time.
+   bullets, each starting with a literal `•` character — Buzz's Pulse tab
+   doesn't parse markdown, so a bullet only reads as a bullet if the `•`
+   character is actually there (confirmed by direct test). Where it fits
+   naturally, pair a headline with its essential supporting fact after an
+   em dash; a single clean sentence is also fine when that says it better.
+   Format for executives with little time.
 
 8. **Structure.** Follow this order:
    1. Title (the opening line from rule 4)
@@ -150,14 +154,20 @@ Sequence:
     2. Decisions needed
     3. Material deliveries
 
-    Label each link by why it matters (not just "link" or the URL). When
-    the destination is a Linear item, a bare `Label: ENVSMO-103`-style
-    reference is enough — Buzz auto-links a recognized Linear identifier,
-    so it doesn't need to be wrapped in markdown link syntax. For a
-    destination Buzz won't auto-link (a GitHub URL, an external doc), write
-    it as a real markdown link with its full destination —
-    `[Label](https://...)` — never a bare label with the URL only
-    described in prose; the draft has to be usable as-is.
+    Label each link by why it matters (not just "link" or the URL) — but
+    write it as plain prose, `Label: https://...`, never markdown link
+    syntax (`[Label](url)`). Confirmed by direct test: Buzz's Pulse tab
+    does not parse markdown — `[text](url)` shows as literal brackets and
+    is not clickable. A raw, bare URL is auto-detected and made clickable
+    on its own, with no special syntax needed.
+
+    Use the shortest URL that still resolves. A Linear issue's full URL
+    includes a long title-slug (`.../issue/ENVSMO-103/standardize-the-...`)
+    that Linear doesn't require — `https://linear.app/<workspace>/issue/
+    ENVSMO-103` on its own resolves to the same issue and is far shorter,
+    which matters since (unlike link labels) the destination URL itself
+    counts toward the 280-character limit here — there's no markdown to
+    hide it behind, so every character of it is visible and counted.
 
     If the user requests a longer Linear pulse post in addition to the short
     Buzz update, include that longer pulse post as one of the links in the
@@ -183,40 +193,39 @@ Sequence:
 
 ```
 [WORK ITEM]: [MOST IMPORTANT OUTCOME OR CHANGE]
-[Fact line, one per line, no bullet symbol]
-[Fact line, one per line, no bullet symbol]
-↗ [Label]: [reference or link] · [Label]: [reference or link]
+• [Fact line]
+• [Fact line]
+↗ [Label]: [short URL] · [Label]: [short URL]
 ```
 
 The `↗` line only appears when there's a link/reference to attach — see
 rule 8. When it appears, it's the last line, and it carries only the
-reference(s) themselves, not loose prose.
+label(s) and raw URL(s), not loose prose.
 
 ## Worked example
 
-Real example, confirmed working in Buzz's Pulse tab:
-
 ```
 Envision SMO: Collaboration foundation added
-VISION docs now map the repo and contribution path.
-Team and Buzz channel created; daily intel routed there.
-9 issues completed; no new PRs.
-↗ Docs: ENVSMO-103
+• VISION docs now map the repo and contribution path.
+• Team and Buzz channel created; daily intel routed there.
+• 9 issues completed; no new PRs.
+↗ Docs: https://linear.app/16x9/issue/ENVSMO-103
 ```
 
-With an external (non-Linear) link, written out in full:
+With more than one link — still the short Linear URL form, and still
+bare (no markdown), separated with `·`:
 
 ```
 Checkout Redesign: Payment failure rate cut from 4.1% to 1.2%
-Retry logic shipped — deployed to 100% of traffic Sep 12
-Support tickets down — 38 → 9 per week since rollout
-↗ Root cause: ENVSMO-88 · [Full pulse post](https://linear.app/...)
+• Retry logic shipped — deployed to 100% of traffic Sep 12
+• Support tickets down — 38 → 9 per week since rollout
+↗ Root cause: https://linear.app/16x9/issue/ENVSMO-88 · Full post: https://linear.app/16x9/issue/ENVSMO-90
 ```
 
 Without any link or reference to cite, the `↗` line is simply omitted:
 
 ```
 Checkout Redesign: Payment failure rate cut from 4.1% to 1.2%
-Retry logic shipped — deployed to 100% of traffic Sep 12
-Support tickets down — 38 → 9 per week since rollout
+• Retry logic shipped — deployed to 100% of traffic Sep 12
+• Support tickets down — 38 → 9 per week since rollout
 ```
