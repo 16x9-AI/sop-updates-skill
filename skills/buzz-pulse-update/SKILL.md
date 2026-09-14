@@ -63,23 +63,33 @@ guess here is public and hard to walk back cleanly.
    `[WORK ITEM]: [MOST IMPORTANT OUTCOME OR CHANGE]`
 
    Do not use an update-type prefix (no "Progress update:", "Status:", etc.).
+   Keep this line itself short — a headline, not a summary of everything
+   that follows. If it's running long, move detail into a bullet instead of
+   lengthening the title; the title should generally read shorter than any
+   single bullet below it.
 
 5. **Length.** Keep every update to **280 visible characters or fewer**,
-   including the title, bullets, visible link labels, and spaces. Do not
-   count link destination URLs toward the limit. Count it — don't estimate
-   by eye — before handing the draft back.
+   including the title, bullet markers (`•`), bullet text, visible link
+   labels, and spaces. Do not count link destination URLs toward the limit.
+   Count it — don't estimate by eye — before handing the draft back.
 
 6. **Prioritization.** Prioritize impact and essential information. Omit
    technical detail unless it's necessary to understand the update.
 
 7. **Bullets, not paragraphs.** Use a short series of scannable one-line
-   bullets. Each bullet pairs the headline with its essential supporting
-   fact after an em dash. Format for executives with little time.
+   bullets, each starting with an explicit marker (`•`). Each bullet pairs
+   the headline with its essential supporting fact after an em dash. Format
+   for executives with little time. Never rely on the line break alone to
+   signal a bullet — Buzz (and most chat surfaces) can collapse plain
+   consecutive lines into one run-on paragraph without a visible marker.
 
 8. **Structure.** Follow this order:
    1. Title (the opening line from rule 4)
-   2. Bullets
-   3. A `↗` line with only the few most decision-relevant supporting details
+   2. Bullets (each marked with `•`)
+   3. A `↗` line — only when there's at least one link or reference to
+      attach to it. It always comes last, at the bottom of the message.
+      If nothing in the update has a link or reference worth citing, omit
+      the `↗` line entirely rather than sending it empty or text-only.
 
 9. **Separators.** Use em dashes (—) to improve scanability.
 
@@ -114,16 +124,30 @@ guess here is public and hard to walk back cleanly.
 
 ```
 [WORK ITEM]: [MOST IMPORTANT OUTCOME OR CHANGE]
-[Bullet headline] — [supporting fact]
-[Bullet headline] — [supporting fact]
-↗ [Most decision-relevant detail], [label](url) · [label](url)
+• [Bullet headline] — [supporting fact]
+• [Bullet headline] — [supporting fact]
+↗ [label](url) · [label](url)
 ```
+
+The `↗` line only appears when there's a link/reference to attach — see
+rule 8. When it appears, it's the last line, and it carries only the
+link(s) themselves (each a real `[Label](url)`), not loose prose.
 
 ## Worked example
 
+With links:
+
 ```
-Checkout Redesign: Payment failure rate cut from 4.1% to 1.2% after retry-logic fix
-Retry logic shipped — deployed to 100% of traffic Sep 12
-Support tickets down — 38 → 9 per week since rollout
-↗ Fix required reverting the Stripe SDK bump; full pulse post: [Details](https://linear.app/...)
+Checkout Redesign: Payment failure rate cut from 4.1% to 1.2%
+• Retry logic shipped — deployed to 100% of traffic Sep 12
+• Support tickets down — 38 → 9 per week since rollout
+↗ [Root cause](https://linear.app/...) · [Full pulse post](https://linear.app/...)
+```
+
+Without any link or reference to cite, the `↗` line is simply omitted:
+
+```
+Checkout Redesign: Payment failure rate cut from 4.1% to 1.2%
+• Retry logic shipped — deployed to 100% of traffic Sep 12
+• Support tickets down — 38 → 9 per week since rollout
 ```
