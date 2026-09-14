@@ -4,7 +4,8 @@ description: >
   Write a Buzz Pulse Update — a short executive-facing status post about a
   Linear project, initiative, or issue. Use whenever asked to draft, post, or
   summarize a "Buzz update," "pulse update," or an executive status note tied
-  to a Linear work item.
+  to a Linear work item. Default output is a draft handed back as text —
+  see "Output" below before posting or publishing anything.
 entity: 16x9
 source: Linear SOP (synced manually — see README.md for update process)
 portable: true
@@ -13,6 +14,24 @@ portable: true
 # Buzz Pulse Update
 
 Write project/initiative/issue updates for executive members.
+
+## Output
+
+**The expected output of this skill is a draft — text handed back to
+whoever asked for it.** Do not post, publish, send, or attach the update
+to anything (Linear, Buzz, Slack, email, a comment, a status update
+object, or any other system) as a side effect of drafting it.
+
+Only take a publishing action if the user's request explicitly asks for
+one — e.g. "post this to Linear," "send it to the #buzz channel." If it's
+ambiguous whether "write me an update" means draft-only or draft-and-send,
+default to draft-only and ask before publishing anywhere. This applies
+even if a publishing tool (Linear, Slack, etc.) happens to be available —
+availability of a tool is not a request to use it.
+
+If you do publish on explicit request, confirm the destination (which
+project/initiative/issue, which channel) before sending, since a wrong
+guess here is public and hard to walk back cleanly.
 
 ## Rules
 
