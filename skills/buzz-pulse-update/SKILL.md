@@ -33,6 +33,24 @@ If you do publish on explicit request, confirm the destination (which
 project/initiative/issue, which channel) before sending, since a wrong
 guess here is public and hard to walk back cleanly.
 
+**Showing a draft: keep the payload unambiguous.** Whatever surface you're
+running in (a terminal, a chat app, a DM), the person reading the draft
+needs to know exactly which characters are the payload — what would
+actually be copied or sent — versus your own commentary or the surface's
+own formatting. A code block, quoted markdown, or a chat bubble can all
+make this ambiguous (fenced text can pick up escaping, a chat renderer can
+add its own bullets on top of yours). So:
+
+- Give the raw draft text by itself, with nothing before or after it on
+  the same block — no leading "Here's the draft:", no trailing
+  explanation inside the same block.
+- Put any explanation, character count, or rationale outside that block,
+  clearly separate, so it's never mistaken for part of the payload.
+- If you're not sure the surface you're in will show the raw text
+  faithfully (e.g., it might auto-render `**bold**` or turn a bare Linear
+  ID into something else), say so plainly rather than letting the person
+  guess whether what they see is what will actually get sent.
+
 ## Publishing to Buzz Pulse (if you have `buzz` CLI access)
 
 This applies only to an agent with its own Buzz identity and `buzz` CLI
