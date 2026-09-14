@@ -1,27 +1,37 @@
 # sop-updates-skill
 
-Shareable, harness-agnostic skill definitions — usable from Claude Code, Pi,
-Hermes, Codex, Grok, or any other agent that can read a markdown file.
+A small library of **portable agent skills** — plain-markdown instruction
+files that any AI coding/agent harness can install and follow. Not just
+Claude: Claude Code, Codex, Grok, Hermes, Pi, or anything else that can read
+a file and follow instructions.
+
+## Why this exists
+
+Most "agent skill" formats are tied to one product. A team that writes its
+standard operating procedures once — how to draft a status update, how to
+file a bug, how to review a PR — shouldn't have to re-teach every agent it
+uses the same rules by hand, or lock that knowledge into one vendor's
+format.
+
+This repo holds SOPs as skills in the simplest format that works
+everywhere: a markdown file with a small YAML header. No proprietary tool
+syntax, no vendor lock-in — just a name, a description of when to use it,
+and instructions to follow.
 
 ## Install (one command)
-
-This repo is private, so you need GitHub access to `16x9-AI/sop-updates-skill`
-first — ask an org admin to invite you, then make sure `git`/`gh` can
-authenticate (run `gh auth login` once if you haven't).
 
 ```bash
 git clone https://github.com/16x9-AI/sop-updates-skill.git /tmp/sop-updates-skill \
   && /tmp/sop-updates-skill/install.sh .
 ```
 
-(or with the GitHub CLI: `gh repo clone 16x9-AI/sop-updates-skill /tmp/sop-updates-skill && /tmp/sop-updates-skill/install.sh .`)
-
-Run it from the root of the project you want the skill available in. It installs every skill in this repo into:
+Run it from the root of the project you want a skill available in. It
+installs every skill in this repo into:
 
 - `.claude/skills/<name>/SKILL.md` — **Claude Code** discovers this automatically, no further setup.
 - `skills/<name>/SKILL.md` — a harness-agnostic copy for anything else.
 
-To install just one skill: `/tmp/sop-updates-skill/install.sh . buzz-pulse-update`
+To install just one skill: `/tmp/sop-updates-skill/install.sh . <skill-name>`
 
 ## Using an installed skill
 
@@ -35,22 +45,35 @@ To install just one skill: `/tmp/sop-updates-skill/install.sh . buzz-pulse-updat
 
 Each skill lives at `skills/<skill-name>/SKILL.md`:
 
-- YAML frontmatter: `name`, `description`, `entity` (which firm/business it
-  belongs to), `source` (where the canonical copy lives, if not here).
-- A markdown body with the actual instructions.
+```markdown
+---
+name: skill-name
+description: When to use this skill, in one to a few sentences.
+entity: which team/org this originated from (optional)
+source: where the canonical copy lives, if not here (optional)
+---
 
-No proprietary tool syntax, no harness-specific invocation semantics — just
-a name, a description of when to use it, and instructions.
+# Skill title
 
-## Skills
+Plain-language instructions the agent should follow.
+```
 
-| Skill | Entity | Description |
-|---|---|---|
-| [`buzz-pulse-update`](skills/buzz-pulse-update/SKILL.md) | 16x9 | Executive-facing Linear pulse/status update format |
+Nothing else is required. Any tool that can read a text file and place it
+in an agent's context can use a skill from this repo — copy/paste, RAG
+indexing, a system-prompt append, or a harness's own skill-discovery
+convention (like Claude Code's `.claude/skills/`).
 
-## Keeping skills in sync with their source of truth
+## Skills in this repo
 
-Some skills (like `buzz-pulse-update`) originate as an SOP written directly
-in Linear. When the Linear copy changes, update the corresponding
-`SKILL.md` by hand and note the change in the commit message — this repo
-does not auto-sync from Linear.
+| Skill | Description |
+|---|---|
+| [`buzz-pulse-update`](skills/buzz-pulse-update/SKILL.md) | Format and rules for a short, executive-facing project/issue status update (character limit, structure, evidence-first sourcing). |
+
+## Contributing a skill
+
+Add a folder under `skills/<your-skill-name>/` with a `SKILL.md` following
+the format above, and it's installable by everyone through the same
+`install.sh`. If the skill originates as an SOP maintained elsewhere (e.g.
+in a project-management tool), note that in the `source` frontmatter field
+and update `SKILL.md` by hand when the source changes — this repo does not
+auto-sync from anywhere.
